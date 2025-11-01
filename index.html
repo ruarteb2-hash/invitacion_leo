@@ -333,8 +333,8 @@
         
         // Configuración de la fecha del evento (Año, Mes-1, Día, Hora)
         // La fecha actual es 1 de Noviembre de 2025.
-        // La fiesta es el 15 de Noviembre de 2025 a la 1:00 PM (13:00)
-        const EVENT_DATE = new Date('November 15, 2025 13:00:00').getTime(); 
+        // El temporizador ahora finaliza a las 00:00 (medianoche) del 15 de Noviembre.
+        const EVENT_DATE = new Date('November 15, 2025 00:00:00').getTime(); 
 
         const MAPS_LINK = "https://maps.google.com/?q=J42G%2B5Q,+La+Rioja,+Argentina&ftid=0x9427d9873396f7e5:0x6bb364cf6f51843b&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"; 
         const WHATSAPP_NUMBER = "5493804973331"; 
@@ -349,36 +349,36 @@
 
         // --- FUNCIONES DE TEMPORIZADOR (RESTAURADAS) ---
 
-        function startCountdown() {
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = EVENT_DATE - now;
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = EVENT_DATE - now;
 
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    // Oculta el contador y muestra el mensaje final
-                    countdownGrid.style.display = 'none';
-                    finishedMessage.style.display = 'flex'; // Usamos flex para centrar los emojis
-                    return;
-                }
-
-                // Cálculo del tiempo restante
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Actualiza el DOM
-                countdownDays.textContent = days < 10 ? '0' + days : days;
-                countdownHours.textContent = hours < 10 ? '0' + hours : hours;
-                countdownMinutes.textContent = minutes < 10 ? '0' + minutes : minutes;
-                countdownSeconds.textContent = seconds < 10 ? '0' + seconds : seconds;
-                
-                // Asegura que el contador esté visible y el mensaje final oculto
-                countdownGrid.style.display = 'grid'; 
-                finishedMessage.style.display = 'none'; 
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                // Oculta el contador y muestra el mensaje final
+                countdownGrid.style.display = 'none';
+                finishedMessage.style.display = 'flex'; // Usamos flex para centrar los emojis
+                return;
             }
 
+            // Cálculo del tiempo restante
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Actualiza el DOM
+            countdownDays.textContent = days < 10 ? '0' + days : days;
+            countdownHours.textContent = hours < 10 ? '0' + hours : hours;
+            countdownMinutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+            countdownSeconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+            
+            // Asegura que el contador esté visible y el mensaje final oculto
+            countdownGrid.style.display = 'grid'; 
+            finishedMessage.style.display = 'none'; 
+        }
+
+        function startCountdown() {
             // Llama a la función una vez de inmediato para evitar el parpadeo "00"
             updateCountdown(); 
             // Establece el intervalo
@@ -505,3 +505,4 @@
 </script>
 </body>
 </html>
+
